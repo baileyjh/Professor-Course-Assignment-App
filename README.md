@@ -1,46 +1,46 @@
-# Getting Started with Create React App
+# Professor-Course Assignment Tool
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Westmont College Spring 2024**
 
-## Available Scripts
+**CS 128 Information Retrieval and Big Data**
 
-In the project directory, you can run:
+*Assistant Professor* Mike Ryu (mryu@westmont.edu) 
 
-### `npm start`
+## Author Information
+* **Name**: Bailey Hall
+* **Email**: bahall@westmont.edu
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## License Information
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+This project is licensed under the MIT License - see the LICENSE file for details
 
-### `npm test`
+Copyright (c) 2024 baileyjh
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Project Description
 
-### `npm run build`
+The Professor-Course Assignment Tool is a program that is created for the department chairs at Westmont College. It is their responsibility to create a report for the Provost’s Office of which courses their department will offer and which professors will be teaching those courses. Rather than manipulating data in a spreadsheet which is the current process for the chairs, the Professor-Course Assignment Tool will be a program with a simple, easy-to-understand, graphical interface with drag-and-drop elements corresponding to professors and courses.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+All that the department chairs will have to do is drag a professor element into a course container to assign them to each other. The program will contain logic that restricts the number of professor-course assignments according to Westmont College policy, and department chairs will have the ability to add and remove elements corresponding to courses and professors in the program. Finally, when the chair is satisfied with their professor-course assignments, the program will be able to export a correctly formatted report of the data ready to be sent to the Provost’s Office.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Instructions for Software Utilization
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Specifications
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+This program will have a couple of significant components.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+The first is the drag-and-drop feature which is a part of the frontend. Elements corresponding to professors will be able to be dragged into containers corresponding to courses. Both professors and courses will be labeled. There will also be a ‘clear’ feature that can reset to program/unassign all professors from courses.
 
-## Learn More
+Still on the frontend, there will be a feature with the ability for department chairs to add or remove elements in the beginning or in circumstances of someone leaving, a new hire, a new course offering, or a course drop.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+For the backend, there will need to be some logic involved regarding the drag-and-drop. Per Westmont policy, each faculty member can only be assigned a certain amount of credits to teach. Each course element in the program will contain information about how many units it is so that when a professor element is dragged into a course, the program will be able to keep track of the total units assigned to a professor and prevent any over-booking. 
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+I plan on mainly using React to program the Professor-Course Assignment Tool. There are many helpful tools including React-CSV (for exporting the spreadsheet report) and React DnD (for drag-and-drop). I may look into CSS for styling. I am hoping to avoid using a DBMS since there isn’t a large amount of data involved in this project and instead use localStorage.
+
+## Credits
+
+1) The initial idea for this program was presented to me by Dr. Michael Everest meverest@westmont.edu, interim Dean in the Office of the Provost at Westmont College for the 2023-2024 academic year.
+2) "React Tutorial For Beginners" by developedbyed: https://www.youtube.com/watch?v=dGcsHMXbSOA
+3) 
