@@ -34,3 +34,71 @@
     transition: 0.2s all;
     box-shadow: 0 0 10px black;
 }
+
+.input_submit:hover {
+    background-color: #0ac8ac;
+}
+
+.input_submit:active {
+    transform: scale(0.8);
+    box-shadow: 0 0 5px black;
+}
+
+.professors {
+    display: flex;
+    justify-content: space-evenly;
+    width: 90%;
+    flex-wrap: wrap;
+}
+
+.professors_single {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+    width: 100px;
+    height: 100px;
+    margin-top: 15px;
+    border-radius: 50%;
+    padding: 20px;
+    background-color: #ceb888;
+    border: 2px solid white;
+    box-shadow: 0 0 10px black;
+}
+
+.professors_single-text {
+    flex: 1;
+    padding: 5px;
+    border: none;
+    font-size: 20px;
+    text-align: center;
+}
+
+.professors_single-text:focus {
+    outline: none;
+}
+
+.icon {
+    margin-bottom: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    color: #63666a
+}
+
+/* @media (max-width: 1200px) {
+    .professors_single {
+        width: 40%
+    }
+}
+
+@media (max-width: 700px) {
+    .input {
+        width: 95%;
+    }
+    .professors {
+        width: 95%;
+    }
+    .professors_single {
+        width: 100%;
+    }
+} */
