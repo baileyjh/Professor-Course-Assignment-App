@@ -10,17 +10,29 @@ interface Props{
 
 const ProfessorList: React.FC<Props> = ({professors, setProfessors}) => {
     return (
-        <div className="professors">
-            {professors.map(professor =>(
-                <SingleProfessor 
-                professor={professor} 
-                key={professor.id}
-                professors={professors}
-                setProfessors={setProfessors}
-                />
-            ))}
+        <div className="container">
+            <div className="professors">
+                <span className="professors_heading">Professors</span>
+                {professors.map((professor) => (
+                        <SingleProfessor 
+                            professor={professor} 
+                            professors={professors} 
+                            key={professor.id}
+                            setProfessors={setProfessors}/>
+                    ))}
+            </div>
+            <div className="professors courses">
+                <span className="courses_heading">Courses</span>
+                {professors.map((professor) => (
+                        <SingleProfessor 
+                            professor={professor} 
+                            professors={professors} 
+                            key={professor.id}
+                            setProfessors={setProfessors}/>
+                    ))}
+            </div>
         </div>
-    )
-}
+    );
+};
 
 export default ProfessorList
