@@ -53,8 +53,11 @@ const SingleProfessor = ({index, professor, professors, setProfessors }: Props) 
                 {...provided.dragHandleProps}
                 ref={provided.innerRef}>
                 {edit? (
-                    <input ref={inputRef} value={editProfessor} onChange={(e) => setEditProfessor(e.target.value)} 
-                    className="professors_single-text"/>
+                    <input 
+                        ref={inputRef} 
+                        value={editProfessor} 
+                        onChange={(e) => setEditProfessor(e.target.value)} 
+                        className="professors_single-text"/>
                     ): professor.isDone ? (
                     <s className="professors_single-text">{ professor.professor }</s>
                     ): (
