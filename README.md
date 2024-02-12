@@ -43,6 +43,6 @@ I plan on mainly using React to program the Professor-Course Assignment Tool. Th
 
 1) The initial idea for this program was presented to me by Dr. Michael Everest meverest@westmont.edu, interim Dean in the Office of the Provost at Westmont College for the 2023-2024 academic year.
 2) "React Tutorial For Beginners" by developedbyed: https://www.youtube.com/watch?v=dGcsHMXbSOA
-3) "React Typescript Tutorial with Project | Learn React JS with Typescript [2021] by RoadsideCOder: https://www.youtube.com/watch?v=knqz3_rPcKk
-4) "React Drag and Drop Tutorial | React Beautiful DnD Tutorial" by RoadsideCOder: https://www.youtube.com/watch?v=uEVHJf30bWI 
+3) "React Typescript Tutorial with Project | Learn React JS with Typescript [2021] by RoadsideCoder: https://www.youtube.com/watch?v=knqz3_rPcKk
+4) "React Drag and Drop Tutorial | React Beautiful DnD Tutorial" by RoadsideCoder: https://www.youtube.com/watch?v=uEVHJf30bWI 
 5) 
