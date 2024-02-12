@@ -45,9 +45,9 @@ const SingleProfessor = ({index, professor, professors, setProfessors }: Props) 
 
     return ( 
         <Draggable draggableId={professor.id.toString()} index={index}>
-            {(provided) => (
+            {(provided, snapshot) => (
             <form 
-                className="professors_single" 
+                className={`professors_single ${snapshot.isDragging? 'drag': ''}`}
                 onSubmit={(e) => handleEdit(e, professor.id)}
                 {...provided.draggableProps}
                 {...provided.dragHandleProps}

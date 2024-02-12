@@ -3,7 +3,7 @@ import './App.css';
 import InputField from './components/InputField';
 import ProfessorList from './components/ProfessorList';
 import { Professor } from './model';
-import { DragDropContext } from 'react-beautiful-dnd';
+import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 
 const App: React.FC = () => {
   const [professor, setProfessor] = useState<string>("");
@@ -19,10 +19,36 @@ const App: React.FC = () => {
     }
   };
 
-  console.log(professors);
+  const onDragEnd = (result:DropResult) => {
+      const { source, destination } = result;
+
+      if (!destination) return;
+      if (destination.droppableId===source.droppableId && destination.index===source.index) return;
+
+      let add, 
+        active = professors,
+        assigned = assignedCourse;
+
+      if(source.droppableId === 'ProfessorsList') {
+        add = active[source.index];
+        active.splice(source.index, 1);
+      } else {
+        add = assigned[source.index];
+        assigned.splice(source.index, 1)
+      }
+
+      if(destination.droppableId === 'ProfessorsList') {
+        active.splice(destination.index, 0, add);
+      } else {
+        assigned.splice(destination.index, 0, add);
+      }
+
+      setAssignedCourse(assigned);
+      setProfessors(active);
+  };
 
   return (
-    <DragDropContext onDragEnd={() => {}}>
+    <DragDropContext onDragEnd={onDragEnd}>
       <div className="App">
       <span className="heading"> Professor-Course Assignment Tool</span>
       <InputField professor={professor} setProfessor={setProfessor} handleAdd={handleAdd} />

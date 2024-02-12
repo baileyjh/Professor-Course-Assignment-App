@@ -138,3 +138,15 @@
 .courses {
     background-color: #63666a;
 }
+
+.dragactive {
+    background-color: #25cab1;
+}
+
+.dragcomplete {
+    background-color: #84878d;
+}
+
+.drag {
+    box-shadow: 0 0 20px black;
+}

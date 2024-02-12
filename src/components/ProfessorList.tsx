@@ -19,9 +19,9 @@ const ProfessorList: React.FC<Props> = ({
     return (
         <div className="container">
             <Droppable droppableId= "ProfessorsList">
-                {(provided) => (
+                {(provided, snapshot) => (
                     <div 
-                        className="professors" 
+                        className={`professors ${snapshot.isDraggingOver?'dragactive':""}`}
                         ref={provided.innerRef}
                         {...provided.droppableProps}>
                             <span className="professors_heading">Professors</span>
@@ -33,13 +33,14 @@ const ProfessorList: React.FC<Props> = ({
                                     key={professor.id}
                                     setProfessors={setProfessors}/>
                         ))}
+                        {provided.placeholder}
                 </div>
                 )}
             </Droppable>
             <Droppable droppableId= "CoursesList">
-                {(provided) => (
+                {(provided, snapshot) => (
                     <div 
-                        className="professors courses" 
+                        className={`professors courses ${snapshot.isDraggingOver?'dragcomplete':""}`}
                         ref={provided.innerRef}
                         {...provided.droppableProps}>
                         <span className="courses_heading">Courses</span>
@@ -51,6 +52,7 @@ const ProfessorList: React.FC<Props> = ({
                                 key={professor.id}
                                 setProfessors={setAssignedCourse}/>
                         ))}
+                        {provided.placeholder}
                     </div>
                 )}
             </Droppable>
