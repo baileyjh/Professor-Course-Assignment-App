@@ -3,10 +3,12 @@ import './App.css';
 import InputField from './components/InputField';
 import ProfessorList from './components/ProfessorList';
 import { Professor } from './model';
+import { DragDropContext } from 'react-beautiful-dnd';
 
 const App: React.FC = () => {
   const [professor, setProfessor] = useState<string>("");
   const [professors, setProfessors]= useState<Professor[]>([]);
+  const [assignedCourse, setAssignedCourse] = useState<Professor[]>([])
 
   const handleAdd = (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,11 +22,18 @@ const App: React.FC = () => {
   console.log(professors);
 
   return (
-    <div className="App">
+    <DragDropContext onDragEnd={() => {}}>
+      <div className="App">
       <span className="heading"> Professor-Course Assignment Tool</span>
       <InputField professor={professor} setProfessor={setProfessor} handleAdd={handleAdd} />
-      <ProfessorList professors={professors} setProfessors={setProfessors}/> 
+      <ProfessorList 
+        professors={professors} 
+        setProfessors={setProfessors}
+        assignedCourse={assignedCourse} 
+        setAssignedCourse={setAssignedCourse}/> 
     </div>
+    </DragDropContext>
+
   );
 }
 
