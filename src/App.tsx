@@ -20,32 +20,37 @@ const App: React.FC = () => {
   };
 
   const onDragEnd = (result:DropResult) => {
-      const { source, destination } = result;
+    const { source, destination } = result;
 
-      if (!destination) return;
-      if (destination.droppableId===source.droppableId && destination.index===source.index) return;
+    if (!destination) return;
+    if (destination.droppableId===source.droppableId && destination.index===source.index) return;
+    if (source.droppableId==='CoursesList') return;
 
-      let add, 
-        active = professors,
-        assigned = assignedCourse;
+    let add, 
+      active = professors,
+      assigned = assignedCourse;
 
-      if(source.droppableId === 'ProfessorsList') {
-        add = active[source.index];
-        active.splice(source.index, 1);
-      } else {
-        add = assigned[source.index];
-        assigned.splice(source.index, 1)
-      }
-
-      if(destination.droppableId === 'ProfessorsList') {
-        active.splice(destination.index, 0, add);
-      } else {
-        assigned.splice(destination.index, 0, add);
-      }
-
+    if(source.droppableId === 'ProfessorsList' && destination.droppableId === 'CoursesList') {
+      add = active[source.index];
+      assigned.splice(destination.index, 0, {id: Date.now(), professor:add?.professor, isDone: false});
       setAssignedCourse(assigned);
       setProfessors(active);
-  };
+      return;
+    }
+
+    if(source.droppableId === 'ProfessorsList' && destination.droppableId === 'ProfessorsList') {
+      add = active[source.index];
+      active.splice(source.index, 1);
+      active.splice(destination.index, 0, add);
+      setAssignedCourse(assigned);
+      setProfessors(active);
+      return;
+    } else {
+      setAssignedCourse(assigned);
+      setProfessors(active);
+      return;
+    }
+};
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
