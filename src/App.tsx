@@ -74,7 +74,7 @@ const App: React.FC = () => {
           professors={professors} 
           setProfessors={setProfessors}
           assignedCourse={assignedCourse} 
-          setAssignedCourse={setAssignedCourse}/> 
+          setAssignedCourse={setAssignedCourse}/>
         <CourseList 
           courses={courses} 
           setCourses={setCourses}/> 

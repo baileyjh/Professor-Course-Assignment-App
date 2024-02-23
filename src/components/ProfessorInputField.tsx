@@ -21,7 +21,7 @@ const ProfessorInputField: React.FC<Props> = ({ professor, setProfessor, handleA
                 onChange={
                     (e)=>setProfessor(e.target.value)
                 }
-                placeholder = "Enter an instructor" 
+                placeholder = "Enter a professor" 
                 className="input_box"/>
             <button className="input_submit_prof" type="submit">Add</button>
         </form>
