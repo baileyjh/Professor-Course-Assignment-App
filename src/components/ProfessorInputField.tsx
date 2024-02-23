@@ -23,7 +23,7 @@ const ProfessorInputField: React.FC<Props> = ({ professor, setProfessor, handleA
                 }
                 placeholder = "Enter an instructor" 
                 className="input_box"/>
-            <button className="input_submit" type="submit">Add</button>
+            <button className="input_submit_prof" type="submit">Add</button>
         </form>
     );
 };

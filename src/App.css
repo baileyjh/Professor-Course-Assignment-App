@@ -22,3 +22,25 @@
     font-size: 35px;
   }
 }
+
+.inputs, .lists{
+  /* display:flex; 
+  flex-direction:row;
+  width: 100%;
+  justify-content: space-around; */
+  display: flex;
+  width: 95%;
+  position: relative;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media (max-width: 700px) {
+  .inputs {
+      width: 95%;
+  }
+  .lists {
+      width: 95%;
+      flex-direction: column;
+  }
+}  

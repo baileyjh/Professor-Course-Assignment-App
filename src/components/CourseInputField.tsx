@@ -23,7 +23,7 @@ const CourseInputField: React.FC<Props> = ({ course, setCourse, handleAdd }) => 
                 }
                 placeholder = "Enter a course" 
                 className="input_box"/>
-            <button className="input_submit" type="submit">Add</button>
+            <button className="input_submit_course" type="submit">Add</button>
         </form>
     );
 };

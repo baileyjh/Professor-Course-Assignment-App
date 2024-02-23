@@ -37,7 +37,7 @@ const ProfessorList: React.FC<Props> = ({
                 </div>
                 )}
             </Droppable>
-            <Droppable droppableId= "CoursesList">
+            {/* <Droppable droppableId= "CoursesList">
                 {(provided, snapshot) => (
                     <div 
                         className={`professors courses ${snapshot.isDraggingOver?'dragcomplete':""}`}
@@ -55,7 +55,7 @@ const ProfessorList: React.FC<Props> = ({
                         {provided.placeholder}
                     </div>
                 )}
-            </Droppable>
+            </Droppable> */}
         </div>
     );
 };
