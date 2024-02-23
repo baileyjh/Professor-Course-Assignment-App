@@ -7,7 +7,7 @@ interface Props{
     handleAdd: (e: React.FormEvent) => void;
 }
 
-const InputField: React.FC<Props> = ({ professor, setProfessor, handleAdd }) => {
+const ProfessorInputField: React.FC<Props> = ({ professor, setProfessor, handleAdd }) => {
     const inputRef = useRef<HTMLInputElement>(null);
     return (
         <form className="input" onSubmit={(e)=>{
@@ -28,4 +28,4 @@ const InputField: React.FC<Props> = ({ professor, setProfessor, handleAdd }) => 
     );
 };
 
-export default InputField;
+export default ProfessorInputField;

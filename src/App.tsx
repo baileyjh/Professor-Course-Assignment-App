@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import './App.css';
-import InputField from './components/InputField';
+import ProfessorInputField from './components/ProfessorInputField';
+import CourseInputField from './components/CourseInputField';
 import ProfessorList from './components/ProfessorList';
-import { Professor } from './model';
+import CourseList from './components/CourseList';
+import { Professor, Course } from './model';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 
 const App: React.FC = () => {
@@ -10,12 +12,19 @@ const App: React.FC = () => {
   const [professors, setProfessors]= useState<Professor[]>([]);
   const [assignedCourse, setAssignedCourse] = useState<Professor[]>([])
 
+  const [course, setCourse] = useState<string>("");
+  const [courses, setCourses]= useState<Course[]>([]);
+
   const handleAdd = (e: React.FormEvent) => {
     e.preventDefault();
 
     if(professor) {
       setProfessors([...professors, {id: Date.now(), professor:professor, isDone: false}])
       setProfessor("");
+    }
+    if(course) {
+      setCourses([...courses, {id: Date.now(), course:course, isDone: false}])
+      setCourse("");
     }
   };
 
@@ -56,7 +65,8 @@ const App: React.FC = () => {
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="App">
       <span className="heading"> Professor-Course Assignment Tool</span>
-      <InputField professor={professor} setProfessor={setProfessor} handleAdd={handleAdd} />
+      <ProfessorInputField professor={professor} setProfessor={setProfessor} handleAdd={handleAdd} />
+      <CourseInputField course={course} setCourse={setCourse} handleAdd={handleAdd}/>
       <ProfessorList 
         professors={professors} 
         setProfessors={setProfessors}

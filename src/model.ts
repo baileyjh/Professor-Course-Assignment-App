@@ -3,3 +3,9 @@ export interface Professor{
     professor: string;
     isDone: boolean;
 }
+
+export interface Course{
+    id: number;
+    course: string;
+    isDone: boolean
+}
