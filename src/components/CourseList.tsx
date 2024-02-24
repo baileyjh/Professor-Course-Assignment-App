@@ -22,7 +22,7 @@ const CourseList: React.FC<Props> = ({
             <Droppable droppableId= "CoursesList">
                 {(provided, snapshot) => (
                     <div 
-                        className={`professors courses ${snapshot.isDraggingOver?'dragcomplete':""}`}
+                        className={`courses ${snapshot.isDraggingOver?'dragcomplete':""}`}
                         ref={provided.innerRef}
                         {...provided.droppableProps}>
                         <span className="courses_heading">Courses</span>

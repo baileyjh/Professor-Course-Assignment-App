@@ -4,6 +4,8 @@
     position: relative;
     align-items: center;
     justify-content: space-between;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .input_box {
@@ -71,11 +73,13 @@
     margin-top: 10px;
     justify-content: space-between;
     align-items: flex-start;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .professors {
     display: flex;
-    width: 47.5%;
+    width: 95%;
     flex-direction: column;
     padding: 15px;
     border-radius: 5px;
@@ -147,6 +151,11 @@
 }  
 
 .courses {
+    display: flex;
+    width: 95%;
+    flex-direction: column;
+    padding: 15px;
+    border-radius: 5px;
     background-color: #63666a;
 }
 
