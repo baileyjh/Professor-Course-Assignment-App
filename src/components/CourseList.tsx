@@ -1,43 +1,43 @@
 import React from 'react';
-import { Course } from '../model';
+import { Course, Professor } from '../model';
 import './styles.css';
 import SingleCourse from './SingleCourse';
-import { Droppable } from 'react-beautiful-dnd';
 
 interface Props{
     courses: Course[];
     setCourses: React.Dispatch<React.SetStateAction<Course[]>>;
+    // assignedProfessors: Professor[]
+    // setAssignedProfessors: React.Dispatch<React.SetStateAction<Professor[]>>;
     // assignedCourse: Course[];
     // setAssignedCourse: React.Dispatch<React.SetStateAction<Course[]>>;
+    assignedProfessors: { [key: string]: Professor[] };
+    setAssignedProfessors: React.Dispatch<React.SetStateAction<{ [key: string]: Professor[] }>>;
+    setProfessors: React.Dispatch<React.SetStateAction<Professor[]>>;
 }
 
 const CourseList: React.FC<Props> = ({
     courses, 
     setCourses, 
-    // assignedCourse, 
-    // setAssignedCourse
+    assignedProfessors,
+    setAssignedProfessors,
+    setProfessors
     }) => {
     return (
         <div className="container">
-            <Droppable droppableId= "CoursesList">
-                {(provided, snapshot) => (
-                    <div 
-                        className={`courses ${snapshot.isDraggingOver?'dragcomplete':""}`}
-                        ref={provided.innerRef}
-                        {...provided.droppableProps}>
-                        <span className="courses_heading">Courses</span>
-                        {courses.map((course, index) => (
-                            <SingleCourse
-                                index={index}
-                                course={course} 
-                                courses={courses} 
-                                key={course.id}
-                                setCourses={setCourses}/>
+          <div className={`courses`}>
+                <span className="courses_heading">Courses</span>
+                    {courses.map((course, index) => (
+                        <SingleCourse
+                            key={course.id}
+                            index={index}
+                            course={course}
+                            courses={courses}
+                            setCourses={setCourses}
+                            assignedProfessors={assignedProfessors}
+                            setAssignedProfessors={setAssignedProfessors}
+                            setProfessors={setProfessors}/>
                         ))}
-                        {provided.placeholder}
-                    </div>
-                )}
-            </Droppable>
+            </div>
         </div>
     );
 };

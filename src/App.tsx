@@ -10,7 +10,8 @@ import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 const App: React.FC = () => {
   const [professor, setProfessor] = useState<string>("");
   const [professors, setProfessors]= useState<Professor[]>([]);
-  const [assignedCourse, setAssignedCourse] = useState<Professor[]>([])
+  const [assignedCourse, setAssignedCourse] = useState<{ [key: string]: Professor[] }>({});
+
 
   const [course, setCourse] = useState<string>("");
   const [courses, setCourses]= useState<Course[]>([]);
@@ -18,13 +19,17 @@ const App: React.FC = () => {
   const handleAdd = (e: React.FormEvent) => {
     e.preventDefault();
 
+    const updatedAssignedCourse = {...assignedCourse}
+
     if(professor) {
       setProfessors([...professors, {id: Date.now(), professor:professor, isDone: false}])
       setProfessor("");
     }
     if(course) {
       setCourses([...courses, {id: Date.now(), course:course, isDone: false}])
+      updatedAssignedCourse["SingleCourse"+Date.now.toString()] = []
       setCourse("");
+      setAssignedCourse(updatedAssignedCourse)
     }
   };
 
@@ -39,9 +44,9 @@ const App: React.FC = () => {
       active = professors,
       assigned = assignedCourse;
 
-    if(source.droppableId === 'ProfessorsList' && destination.droppableId === 'CoursesList') {
+    if(source.droppableId === 'ProfessorsList' && destination.droppableId.startsWith("SingleCourse")) {
       add = active[source.index];
-      assigned.splice(destination.index, 0, {id: Date.now(), professor:add?.professor, isDone: false});
+      assigned[destination.droppableId] = [{id: Date.now(), professor:add?.professor, isDone: false}]
       setAssignedCourse(assigned);
       setProfessors(active);
       return;
@@ -72,12 +77,13 @@ const App: React.FC = () => {
       <div className="lists">
         <ProfessorList 
           professors={professors} 
-          setProfessors={setProfessors}
-          assignedCourse={assignedCourse} 
-          setAssignedCourse={setAssignedCourse}/>
+          setProfessors={setProfessors}/>
         <CourseList 
           courses={courses} 
-          setCourses={setCourses}/> 
+          setCourses={setCourses}
+          assignedProfessors={assignedCourse}
+          setAssignedProfessors={setAssignedCourse}
+          setProfessors={setProfessors}/> 
       </div>
     </div>
     </DragDropContext>

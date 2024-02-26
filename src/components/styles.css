@@ -96,6 +96,14 @@
     color: white;
 }
 
+.single_course_heading{
+    flex: 1;
+    padding: 5px;
+    border: none;
+    font-size: 30px;
+    color: black;
+}
+
 .professors_single {
     display: flex;
     border-radius: 5px;
@@ -106,7 +114,24 @@
     transition: 0.2s
 }
 
+.courses_single {
+    display: flex;
+    width: 95%;
+    flex-direction: column;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 15px;
+    background-color: #a7a8aa;
+    border: 2px solid white;
+    transition: 0.2s;
+}
+
 .professors_single:hover {
+    box-shadow: 0 0 5px black;
+    transform: scale(1.03);
+}
+
+.courses_single:hover {
     box-shadow: 0 0 5px black;
     transform: scale(1.03);
 }
@@ -118,15 +143,48 @@
     font-size: 20px;
 }
 
+.courses_single-text {
+    flex: 1;
+    padding: 5px;
+    border: none;
+    font-size: 20px;
+    align-self: flex-start;
+}
+
 .professors_single-text:focus {
     outline: none;
+}
+
+.courses_single-text:focus {
+    outline: none;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.icons-container {
+    display: flex;
 }
 
 .icon {
     margin-bottom: 10px;
     font-size: 20px;
     cursor: pointer;
-    color: #63666a
+    color: #63666a;
+    margin-right: 0px;
+    margin-left: auto;
+}
+
+.icon_course {
+    margin-bottom: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    color: black;
+    margin-right: 0px;
+    margin-left: auto;
 }
 
 @media (max-width: 1200px) {
@@ -164,7 +222,7 @@
 }
 
 .dragcomplete {
-    background-color: #84878d;
+    background-color: #d9d9d6;
 }
 
 .drag {

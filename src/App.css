@@ -8,6 +8,10 @@
   font-family: Helvetica, sans-serif;
 }
 
+body {
+  background-color: #9d2235;
+}
+
 .heading{
   font-size: 40px;
   margin: 30px 0;
