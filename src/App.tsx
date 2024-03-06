@@ -22,7 +22,7 @@ const App: React.FC = () => {
     const updatedAssignedCourse = {...assignedCourse}
 
     if(professor) {
-      setProfessors([...professors, {id: Date.now(), professor:professor, isDone: false}])
+      setProfessors([...professors, {id: Date.now(), professor:professor, isDone: false, course: false}])
       setProfessor("");
     }
     if(course) {
@@ -46,7 +46,7 @@ const App: React.FC = () => {
 
     if(source.droppableId === 'ProfessorsList' && destination.droppableId.startsWith("SingleCourse")) {
       add = active[source.index];
-      assigned[destination.droppableId] = [{id: Date.now(), professor:add?.professor, isDone: false}]
+      assigned[destination.droppableId] = [{id: Date.now(), professor:add?.professor, isDone: false, course: true}]
       setAssignedCourse(assigned);
       setProfessors(active);
       return;

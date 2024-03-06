@@ -63,7 +63,7 @@ const SingleProfessor = ({index, professor, professors, setProfessors }: Props) 
                     ): (
                     <span className="professors_single-text">{ professor.professor }</span>
                     )}
-            <div>
+            {!professor.course && <div>
                 <span 
                     className='icon' 
                     onClick={() => {
@@ -78,7 +78,7 @@ const SingleProfessor = ({index, professor, professors, setProfessors }: Props) 
                 <span className='icon' onClick={() => handleDone(professor.id)}>
                     <MdDone />
                 </span>
-            </div>
+            </div>}
             </form>
             )}
         </Draggable>
