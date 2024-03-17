@@ -1,5 +1,5 @@
 export interface Professor{
-    id: number;
+    id: string;
     professor: string;
     isDone: boolean;
     course: boolean;

@@ -100,7 +100,9 @@ const SingleCourse: React.FC<Props> = ({
                                     professor={professor} 
                                     professors={assignedProfessors["SingleCourse"+course.id.toString()]} 
                                     key={professor.id}
-                                    setProfessors={setProfessors}/>
+                                    setProfessors={setProfessors}
+                                    assignedProfessors={assignedProfessors}
+                                    setAssignedProfessors={setAssignedProfessors}/>
                         ))}
                         {provided.placeholder}
                 </form>

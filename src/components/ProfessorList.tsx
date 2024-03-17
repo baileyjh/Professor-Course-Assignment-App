@@ -7,13 +7,15 @@ import { Droppable } from 'react-beautiful-dnd';
 interface Props{
     professors: Professor[];
     setProfessors: React.Dispatch<React.SetStateAction<Professor[]>>;
-    // assignedCourse: Professor[];
-    // setAssignedCourse: React.Dispatch<React.SetStateAction<Professor[]>>;
+    assignedProfessors: { [key: string]: Professor[] };
+    setAssignedProfessors: React.Dispatch<React.SetStateAction<{ [key: string]: Professor[] }>>;
 }
 
 const ProfessorList: React.FC<Props> = ({
     professors, 
-    setProfessors}) => {
+    setProfessors,
+    assignedProfessors,
+    setAssignedProfessors}) => {
     return (
         <div className="container">
             <Droppable droppableId= "ProfessorsList">
@@ -29,7 +31,9 @@ const ProfessorList: React.FC<Props> = ({
                                     professor={professor} 
                                     professors={professors} 
                                     key={professor.id}
-                                    setProfessors={setProfessors}/>
+                                    setProfessors={setProfessors}
+                                    assignedProfessors={assignedProfessors}
+                                    setAssignedProfessors={setAssignedProfessors}/>
                         ))}
                         {provided.placeholder}
                 </div>

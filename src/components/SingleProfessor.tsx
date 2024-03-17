@@ -10,23 +10,35 @@ type Props = {
     professor: Professor;
     professors: Professor[]
     setProfessors: React.Dispatch<React.SetStateAction<Professor[]>>;
+    assignedProfessors: { [key: string]: Professor[] };
+    setAssignedProfessors: React.Dispatch<React.SetStateAction<{ [key: string]: Professor[] }>>;
 }
 
-const SingleProfessor = ({index, professor, professors, setProfessors }: Props) => {
+const SingleProfessor = ({index, professor, professors, setProfessors, assignedProfessors, setAssignedProfessors }: Props) => {
 
     const [edit, setEdit] = useState<boolean>(false)
     const [editProfessor, setEditProfessor] = useState<string>(professor.professor)
     
-    const handleDone = (id: number) => {
+    const handleDone = (id: string) => {
         setProfessors(professors.map((professor) => 
         professor.id===id?{...professor, isDone:!professor.isDone}: professor))
     };
 
-    const handleDelete = (id: number) => {
+    const handleDelete = (id: string) => {
+        let newAssignedProfessors
+        newAssignedProfessors = assignedProfessors
+
+        for (let key in newAssignedProfessors) {
+            let newValue, array
+            array = newAssignedProfessors[key]
+            newValue = array.filter((professor) => !professor.id.toString().startsWith(id.toString()))
+            newAssignedProfessors[key] = newValue
+        }
+        setAssignedProfessors(newAssignedProfessors)
         setProfessors(professors.filter((professor) => professor.id !== id));
     };
 
-    const handleEdit = (e: React.FormEvent, id: number) => {
+    const handleEdit = (e: React.FormEvent, id: string) => {
         e.preventDefault();
 
         setProfessors(
