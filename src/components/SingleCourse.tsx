@@ -76,6 +76,18 @@ const SingleCourse: React.FC<Props> = ({
                                 ): (
                                 <span className="single_course_heading">{ course.course }</span>
                                 )}
+                        <div className="course_credits">
+                            <label className='select_label'>
+                                Credits:
+                                <select className='select_box'>
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                </select>
+                            </label>
+                        </div>
                         <div className='icons-container'>
                             <span 
                                 className='icon_course' 
@@ -93,6 +105,7 @@ const SingleCourse: React.FC<Props> = ({
                             </span>
                         </div>
                         </div>
+                        
                             {/* <span className="professors_heading">{ course.course }</span> */}
                             {assignedProfessors["SingleCourse"+course.id.toString()]?.map((professor, index) => (
                                 <SingleProfessor 

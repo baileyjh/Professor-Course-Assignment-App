@@ -100,8 +100,32 @@
     flex: 1;
     padding: 5px;
     border: none;
-    font-size: 30px;
+    font-size: 23px;
     color: black;
+}
+
+.course_credits{
+    position: relative;
+    font-family: Helvetica, sans-serif;
+    width: 150px;
+}
+
+.course_credits {
+    margin-top: 0px;
+}
+
+.select_label {
+    margin-right: 10px;
+}
+
+.select_label select {
+    padding: 5px;
+    border: 2px solid white;
+    border-radius: 4px;
+    font-size: 15px;
+    margin-left: 10px;
+    background-color: #d9d9d6;
+    width: 50px;
 }
 
 .professors_single {
@@ -163,6 +187,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    align-content: space-evenly;
+    justify-items: start;
 }
 
 .icons-container {
