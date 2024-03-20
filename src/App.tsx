@@ -26,7 +26,7 @@ const App: React.FC = () => {
       setProfessor("");
     }
     if(course) {
-      setCourses([...courses, {id: Date.now(), course:course, isDone: false}])
+      setCourses([...courses, {id: Date.now(), course:course, isDone: false, credit: '0'}])
       updatedAssignedCourse["SingleCourse"+Date.now.toString()] = []
       setCourse("");
       setAssignedCourse(updatedAssignedCourse)
@@ -79,7 +79,8 @@ const App: React.FC = () => {
           professors={professors} 
           setProfessors={setProfessors}
           assignedProfessors={assignedCourse}
-          setAssignedProfessors={setAssignedCourse}/>
+          setAssignedProfessors={setAssignedCourse}
+          courses={courses}/>
         <CourseList 
           courses={courses} 
           setCourses={setCourses}

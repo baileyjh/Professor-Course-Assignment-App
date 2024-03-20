@@ -9,4 +9,5 @@ export interface Course{
     id: number;
     course: string;
     isDone: boolean
+    credit: string
 }

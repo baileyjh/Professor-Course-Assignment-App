@@ -1,5 +1,5 @@
 import React from 'react';
-import { Professor } from '../model';
+import { Professor, Course } from '../model';
 import './styles.css';
 import SingleProfessor from './SingleProfessor';
 import { Droppable } from 'react-beautiful-dnd';
@@ -9,13 +9,15 @@ interface Props{
     setProfessors: React.Dispatch<React.SetStateAction<Professor[]>>;
     assignedProfessors: { [key: string]: Professor[] };
     setAssignedProfessors: React.Dispatch<React.SetStateAction<{ [key: string]: Professor[] }>>;
+    courses: Course[];
 }
 
 const ProfessorList: React.FC<Props> = ({
     professors, 
     setProfessors,
     assignedProfessors,
-    setAssignedProfessors}) => {
+    setAssignedProfessors,
+    courses}) => {
     return (
         <div className="container">
             <Droppable droppableId= "ProfessorsList">
@@ -33,7 +35,8 @@ const ProfessorList: React.FC<Props> = ({
                                     key={professor.id}
                                     setProfessors={setProfessors}
                                     assignedProfessors={assignedProfessors}
-                                    setAssignedProfessors={setAssignedProfessors}/>
+                                    setAssignedProfessors={setAssignedProfessors}
+                                    courses={courses}/>
                         ))}
                         {provided.placeholder}
                 </div>

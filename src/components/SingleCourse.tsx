@@ -48,6 +48,14 @@ const SingleCourse: React.FC<Props> = ({
             
                     setEdit(false);
         };
+
+        const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>, id: number) =>{
+            const { value } = e.target
+            setCourses(
+                courses.map((course) => (
+                    course.id === id ? {...course, credit:value}: course
+                    )));
+        }
     
         useEffect(() => {
             inputRef.current?.focus();
@@ -79,7 +87,8 @@ const SingleCourse: React.FC<Props> = ({
                         <div className="course_credits">
                             <label className='select_label'>
                                 Credits:
-                                <select className='select_box'>
+                                <select className='select_box'
+                                        onChange={(e) => handleSelectChange(e, course.id)}>
                                     <option value="0">0</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -105,8 +114,6 @@ const SingleCourse: React.FC<Props> = ({
                             </span>
                         </div>
                         </div>
-                        
-                            {/* <span className="professors_heading">{ course.course }</span> */}
                             {assignedProfessors["SingleCourse"+course.id.toString()]?.map((professor, index) => (
                                 <SingleProfessor 
                                     index={index}
@@ -115,7 +122,8 @@ const SingleCourse: React.FC<Props> = ({
                                     key={professor.id}
                                     setProfessors={setProfessors}
                                     assignedProfessors={assignedProfessors}
-                                    setAssignedProfessors={setAssignedProfessors}/>
+                                    setAssignedProfessors={setAssignedProfessors}
+                                    courses={courses}/>
                         ))}
                         {provided.placeholder}
                 </form>
