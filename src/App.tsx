@@ -33,6 +33,12 @@ const App: React.FC = () => {
     }
   };
 
+  const clearProgram = () => {
+    setCourses([])
+    setProfessors([])
+    setAssignedCourse({})
+  }
+
   const onDragEnd = (result:DropResult) => {
     const { source, destination } = result;
 
@@ -70,6 +76,9 @@ const App: React.FC = () => {
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="App">
       <span className="heading"> Professor-Course Assignment Tool</span>
+      <div>
+        <button className='clear_button' onClick={clearProgram}>Clear Program</button>
+      </div>
       <div className="inputs">
         <ProfessorInputField professor={professor} setProfessor={setProfessor} handleAdd={handleAdd} />
         <CourseInputField course={course} setCourse={setCourse} handleAdd={handleAdd}/>

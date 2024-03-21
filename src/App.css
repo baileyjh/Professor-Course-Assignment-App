@@ -14,10 +14,33 @@ body {
 
 .heading{
   font-size: 40px;
-  margin: 30px 0;
+  margin-top: 40px;
+  margin-bottom: 15px;
   color: white;
   z-index: 1;
   text-align: center;
+}
+
+.clear_button {
+  font-size: 15px;
+  font-weight: bold;
+  margin-top: 0px;
+  margin-bottom: 40px;
+  color: white;
+  text-align: center;
+  background-color: #b79d56;
+  border: none;
+  padding: 10px 13px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 5px;
+  transition: 0.2s all;
+  box-shadow: 0 0 10px black;
+}
+
+.clear_button:hover {
+  background-color: #cfb66f;
 }
 
 @media (max-width: 800px) {
