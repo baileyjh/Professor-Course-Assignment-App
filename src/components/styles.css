@@ -100,7 +100,7 @@
     flex: 1;
     padding: 5px;
     border: none;
-    font-size: 23px;
+    font-size: 18px;
     color: black;
 }
 
@@ -110,26 +110,44 @@
     width: 150px;
 }
 
-.course_credits {
+.selects {
     margin-top: 0px;
+    flex-direction:row;
 }
 
-.select_label {
+.credit_label {
     margin-right: 10px;
+    font-size: 13px;
 }
 
-.select_label select {
+.credit_label select {
     padding: 5px;
     border: 2px solid white;
     border-radius: 4px;
-    font-size: 15px;
+    font-size: 13px;
     margin-left: 10px;
     background-color: #d9d9d6;
     width: 50px;
 }
 
+.term_label {
+    margin-right: 20px;
+    font-size: 13px;
+}
+
+.term_label select {
+    padding: 5px;
+    border: 2px solid white;
+    border-radius: 4px;
+    font-size: 13px;
+    margin-left: 10px;
+    background-color: #d9d9d6;
+    width: 80px;
+}
+
 .credit_amount {
     margin-right:30px;
+    font-size: 15px;
 }
 
 .professors_single {
@@ -168,7 +186,7 @@
     flex: 1;
     padding: 5px;
     border: none;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .courses_single-text {

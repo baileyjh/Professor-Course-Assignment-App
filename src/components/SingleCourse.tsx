@@ -84,8 +84,8 @@ const SingleCourse: React.FC<Props> = ({
                                 ): (
                                 <span className="single_course_heading">{ course.course }</span>
                                 )}
-                        <div className="course_credits">
-                            <label className='select_label'>
+                        <div className="selects">
+                            <label className='credit_label'>
                                 Credits:
                                 <select className='select_box'
                                         onChange={(e) => handleSelectChange(e, course.id)}>
@@ -96,6 +96,14 @@ const SingleCourse: React.FC<Props> = ({
                                     <option value="4">4</option>
                                     <option value="5">5</option>
                                     <option value="6">6</option>
+                                </select>
+                            </label>
+                            <label className='term_label'>
+                                Term:
+                                <select className='select_box'>
+                                    <option value="none" selected disabled hidden>Select</option>
+                                    <option value="fall">Fall</option>
+                                    <option value="spring">Spring</option>
                                 </select>
                             </label>
                         </div>
