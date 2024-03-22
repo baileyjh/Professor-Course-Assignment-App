@@ -6,6 +6,7 @@ import ProfessorList from './components/ProfessorList';
 import CourseList from './components/CourseList';
 import { Professor, Course } from './model';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
+import CSV from './components/CSV';
 
 const App: React.FC = () => {
   const [professor, setProfessor] = useState<string>("");
@@ -76,8 +77,11 @@ const App: React.FC = () => {
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="App">
       <span className="heading"> Professor-Course Assignment Tool</span>
-      <div>
+      <div className='buttons'>
         <button className='clear_button' onClick={clearProgram}>Clear Program</button>
+        <div>
+          <CSV/>
+        </div>
       </div>
       <div className="inputs">
         <ProfessorInputField professor={professor} setProfessor={setProfessor} handleAdd={handleAdd} />
