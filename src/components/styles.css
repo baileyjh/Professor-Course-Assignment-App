@@ -98,9 +98,9 @@
 
 .single_course_heading{
     flex: 1;
-    padding: 5px;
+    padding: 4px;
     border: none;
-    font-size: 18px;
+    font-size: 17px;
     color: black;
 }
 
@@ -115,34 +115,75 @@
     flex-direction:row;
 }
 
-.credit_label {
+.sub_label {
     margin-right: 10px;
     font-size: 13px;
 }
 
-.credit_label select {
+.sub_label select {
     padding: 5px;
     border: 2px solid white;
     border-radius: 4px;
-    font-size: 13px;
-    margin-left: 10px;
+    font-size: 12px;
+    margin-left: 0px;
+    margin-right: 2px;
     background-color: #d9d9d6;
-    width: 50px;
+    width: 61px;
+    margin-top: 5px;
+}
+
+.number_input_box {
+    padding: 5px;
+    border: 2px solid white;
+    border-radius: 4px;
+    font-size: 12px;
+    margin-left: 2px;
+    margin-right: 2px;
+    background-color: #d9d9d6;
+    width: 20px;
+    margin-top: 5px;
+}
+
+.section_input_box {
+    padding: 5px;
+    border: 2px solid white;
+    border-radius: 4px;
+    font-size: 12px;
+    margin-left: 2px;
+    background-color: #d9d9d6;
+    width: 8px;
+    margin-top: 5px;
+}
+
+.credit_label {
+    margin-right: 0px;
+    font-size: 13px;
+}
+
+.credit_label select {
+    padding: 4px;
+    border: 2px solid white;
+    border-radius: 4px;
+    font-size: 12px;
+    margin-left: 8px;
+    margin-right: 8px;
+    background-color: #d9d9d6;
+    width: 40px;
 }
 
 .term_label {
-    margin-right: 20px;
+    margin-right: 10px;
     font-size: 13px;
 }
 
 .term_label select {
-    padding: 5px;
+    padding: 4px;
     border: 2px solid white;
     border-radius: 4px;
-    font-size: 13px;
-    margin-left: 10px;
+    font-size: 12px;
+    margin-left: 8px;
     background-color: #d9d9d6;
-    width: 80px;
+    width: 70px;
 }
 
 .credit_amount {

@@ -73,6 +73,7 @@ const SingleCourse: React.FC<Props> = ({
                         {...provided.droppableProps}
                         ref={provided.innerRef}>
                             <div className='header'>
+                                <div className='course_title'>
                             {edit? (
                                 <input 
                                     ref={inputRef} 
@@ -84,6 +85,58 @@ const SingleCourse: React.FC<Props> = ({
                                 ): (
                                 <span className="single_course_heading">{ course.course }</span>
                                 )}
+                                <div className='course_key'>
+                                    <label className='sub_label'>
+                                        <select className='select_box'>
+                                            <option value="none" selected disabled hidden></option>
+                                            <option value="AN">AN</option>
+                                            <option value="APP">APP</option>
+                                            <option value="ART">ART</option>
+                                            <option value="BIO">BIO</option>
+                                            <option value="CHM">CHM</option>
+                                            <option value="COM">COM</option>
+                                            <option value="CS">CS</option>
+                                            <option value="EB">EB</option>
+                                            <option value="ED">ED</option>
+                                            <option value="EN">EN</option>
+                                            <option value="ENG">ENG</option>
+                                            <option value="ENV">ENV</option>
+                                            <option value="ETN">ETN</option>
+                                            <option value="FLM">FLM</option>
+                                            <option value="FR">FR</option>
+                                            <option value="GS">GS</option>
+                                            <option value="GER">GER</option>
+                                            <option value="GLS">GLS</option>
+                                            <option value="GRK">GRK</option>
+                                            <option value="HB">HB</option>
+                                            <option value="HIS">HIS</option>
+                                            <option value="IS">IS</option>
+                                            <option value="KNS">KNS</option>
+                                            <option value="LS">LS</option>
+                                            <option value="MA">MA</option>
+                                            <option value="ME">ME</option>
+                                            <option value="MUA">MUA</option>
+                                            <option value="NUR">NUR</option>
+                                            <option value="PHI">PHI</option>
+                                            <option value="PEA">PEA</option>
+                                            <option value="PHS">PHS</option>
+                                            <option value="PHY">PHY</option>
+                                            <option value="POL">POL</option>
+                                            <option value="PSY">PSY</option>
+                                            <option value="RS">RS</option>
+                                            <option value="SOC">SOC</option>
+                                            <option value="SP">SP</option>
+                                            <option value="TA">TA</option>
+                                        </select>
+                                        —
+                                        <input 
+                                            className="number_input_box"/>
+                                        —
+                                        <input 
+                                            className="section_input_box"/>
+                                    </label>
+                                </div>
+                                </div>
                         <div className="selects">
                             <label className='credit_label'>
                                 Credits:
@@ -97,11 +150,11 @@ const SingleCourse: React.FC<Props> = ({
                                     <option value="5">5</option>
                                     <option value="6">6</option>
                                 </select>
-                            </label>
-                            <label className='term_label'>
+                            {/* </label>
+                            <label className='term_label'> */}
                                 Term:
                                 <select className='select_box'>
-                                    <option value="none" selected disabled hidden>Select</option>
+                                    <option value="none" selected disabled hidden></option>
                                     <option value="fall">Fall</option>
                                     <option value="spring">Spring</option>
                                 </select>
