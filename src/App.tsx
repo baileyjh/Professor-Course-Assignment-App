@@ -58,18 +58,6 @@ const App: React.FC = () => {
       assigned[destination.droppableId] = [{id: add.id + Date.now().toString(), professor:add?.professor, isDone: false, course: true, credits: '', first: add.first, last: add.last}]
       setAssignedCourse(assigned);
       setProfessors(active);
-
-      // let courseId = Number(destination.droppableId.replace("SingleCourse", ''))
-      // let totalCred: number = Number(add.credits)
-      // for (let cour of courseList){
-      //   if (cour.id === courseId){
-      //     totalCred += Number(cour.credit)
-      //   }
-      // }
-      // setProfessors(
-      //   professors.map((professor) => (
-      //       professor.id === add.id ? {...professor, credits: String(totalCred)}: professor
-      //       )));
       return;
     }
 
@@ -97,7 +85,8 @@ const App: React.FC = () => {
           <CSV
             courses={courses}
             assignedProfessors={assignedCourse}
-            professors={professors}/>
+            professors={professors}
+            setProfessors={setProfessors}/>
         </div>
       </div>
       <div className="inputs">
@@ -116,6 +105,7 @@ const App: React.FC = () => {
           setCourses={setCourses}
           assignedProfessors={assignedCourse}
           setAssignedProfessors={setAssignedCourse}
+          professors={professors}
           setProfessors={setProfessors}/> 
       </div>
     </div>

@@ -13,6 +13,7 @@ interface Props{
     setCourses: React.Dispatch<React.SetStateAction<Course[]>>;
     assignedProfessors: { [key: string]: Professor[] };
     setAssignedProfessors: React.Dispatch<React.SetStateAction<{ [key: string]: Professor[] }>>;
+    professors: Professor[];
     setProfessors: React.Dispatch<React.SetStateAction<Professor[]>>;
 }
 
@@ -23,6 +24,7 @@ const SingleCourse: React.FC<Props> = ({
     setCourses,
     assignedProfessors, 
     setAssignedProfessors,
+    professors,
     setProfessors
     }) => {
 
@@ -55,22 +57,6 @@ const SingleCourse: React.FC<Props> = ({
                 courses.map((course) => (
                     course.id === id ? {...course, credit:value}: course
                     )));
-            for (let key in assignedProfessors){
-                let courseId = Number(key.replace("SingleCourse", ''))
-                if (courseId===id){
-                    let profList: Professor[] = assignedProfessors[key];
-                    for (let prof of profList){
-                        let identifier = prof.id
-                        for (let key2 in assignedProfessors){
-                            let profList2: Professor[] = assignedProfessors[key2];
-                            for (let prof2 of profList2){
-                                let identifier2 = prof2.id
-                            }
-
-                        }
-                    }
-                }
-            }
         }
 
         const handleSelectTermChange = (e: React.ChangeEvent<HTMLSelectElement>, id: number) =>{

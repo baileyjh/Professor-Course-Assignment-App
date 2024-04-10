@@ -7,9 +7,10 @@ interface Props{
     courses: Course[];
     assignedProfessors: { [key: string]: Professor[] };
     professors: Professor[];
+    setProfessors: React.Dispatch<React.SetStateAction<Professor[]>>;
 }
 
-const CSV: React.FC<Props> = ({courses, assignedProfessors, professors}) => {
+const CSV: React.FC<Props> = ({courses, assignedProfessors, professors, setProfessors}) => {
 
     const headers = [
         {label: "SUB", key: 'course.sub'},
@@ -52,6 +53,30 @@ const CSV: React.FC<Props> = ({courses, assignedProfessors, professors}) => {
         return data
     };
 
+    const handleCSVExport = () => {
+        for (let profess of professors){
+            let creditTotal = 0
+            for (let key in assignedProfessors) {
+                let profList: Professor[] = assignedProfessors[key];
+                for (let prof of profList) {
+                    let identifier = prof.id
+                    if (identifier.startsWith(profess.id)){
+                        let courseId = Number(key.replace("SingleCourse", ''))
+                        for (let course of courses){
+                            if (course.id === courseId){
+                                creditTotal= creditTotal+ Number(course.credit)
+                            }
+                        }
+                    }
+                }
+            }
+            setProfessors(
+                professors.map((professor) => (
+                    professor.id === profess.id ? {...professor, credits:String(creditTotal)}: professor
+                    )));
+        }
+    }
+
   return (
     <div>
         <CSVLink
@@ -59,7 +84,8 @@ const CSV: React.FC<Props> = ({courses, assignedProfessors, professors}) => {
             headers={headers}
             filename='file_name.csv'
             target='_blank'>
-        <button className='csv_button'>
+        <button className='csv_button'
+            onClick={handleCSVExport}>
             Download CSV
         </button>
         </CSVLink>

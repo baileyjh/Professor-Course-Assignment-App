@@ -72,13 +72,6 @@ const SingleProfessor = ({index, professor, professors, setProfessors, assignedP
                 }
             }
         }
-        // let identity = professor.id
-        // let string_credits = String(creditTotal)
-        // setProfessors(
-        //     professors.map((professor) => (
-        //         professor.id === identity ? {...professor, credits: string_credits}: professor
-        //         )));
-
         return creditTotal
     };
 
