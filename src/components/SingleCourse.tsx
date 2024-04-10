@@ -38,7 +38,7 @@ const SingleCourse: React.FC<Props> = ({
             setCourses(courses.filter((course) => course.id !== id));
         };
     
-        const handleEdit = (e: React.FormEvent, id: number) => {
+        const handleCourseEdit = (e: React.FormEvent, id: number) => {
             e.preventDefault();
     
             setCourses(
@@ -49,13 +49,61 @@ const SingleCourse: React.FC<Props> = ({
                     setEdit(false);
         };
 
-        const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>, id: number) =>{
+        const handleSelectCreditChange = (e: React.ChangeEvent<HTMLSelectElement>, id: number) =>{
             const { value } = e.target
             setCourses(
                 courses.map((course) => (
                     course.id === id ? {...course, credit:value}: course
                     )));
+            for (let key in assignedProfessors){
+                let courseId = Number(key.replace("SingleCourse", ''))
+                if (courseId===id){
+                    let profList: Professor[] = assignedProfessors[key];
+                    for (let prof of profList){
+                        let identifier = prof.id
+                        for (let key2 in assignedProfessors){
+                            let profList2: Professor[] = assignedProfessors[key2];
+                            for (let prof2 of profList2){
+                                let identifier2 = prof2.id
+                            }
+
+                        }
+                    }
+                }
+            }
         }
+
+        const handleSelectTermChange = (e: React.ChangeEvent<HTMLSelectElement>, id: number) =>{
+            const { value } = e.target
+            setCourses(
+                courses.map((course) => (
+                    course.id === id ? {...course, term:value}: course
+                    )));
+        }
+
+        const handleSelectSubChange = (e: React.ChangeEvent<HTMLSelectElement>, id: number) =>{
+            const { value } = e.target
+            setCourses(
+                courses.map((course) => (
+                    course.id === id ? {...course, sub:value}: course
+                    )));
+        }
+
+        const handleInputNumChange = (e: React.ChangeEvent<HTMLInputElement>, id: number) => {
+            const { value } = e.target
+            setCourses(
+                courses.map((course) => (
+                    course.id === id ? {...course, num:value}: course
+                    )));
+          }
+
+        const handleInputSecChange = (e: React.ChangeEvent<HTMLInputElement>, id: number) => {
+            const { value } = e.target
+            setCourses(
+                courses.map((course) => (
+                    course.id === id ? {...course, sec:value}: course
+                    )));
+          }
     
         useEffect(() => {
             inputRef.current?.focus();
@@ -69,7 +117,7 @@ const SingleCourse: React.FC<Props> = ({
                 {(provided, snapshot) => (
                     <form 
                         className={`courses_single ${snapshot.isDraggingOver?'dragcomplete':""}`}
-                        onSubmit={(e) => handleEdit(e, course.id)}
+                        onSubmit={(e) => handleCourseEdit(e, course.id)}
                         {...provided.droppableProps}
                         ref={provided.innerRef}>
                             <div className='header'>
@@ -87,7 +135,8 @@ const SingleCourse: React.FC<Props> = ({
                                 )}
                                 <div className='course_key'>
                                     <label className='sub_label'>
-                                        <select className='select_box'>
+                                        <select className='select_box'
+                                                onChange={(e) => handleSelectSubChange(e, course.id)}>
                                             <option value="none" selected disabled hidden></option>
                                             <option value="AN">AN</option>
                                             <option value="APP">APP</option>
@@ -130,10 +179,12 @@ const SingleCourse: React.FC<Props> = ({
                                         </select>
                                         —
                                         <input 
-                                            className="number_input_box"/>
+                                            className="number_input_box"
+                                            onChange={(e) => handleInputNumChange(e, course.id)}/>
                                         —
                                         <input 
-                                            className="section_input_box"/>
+                                            className="section_input_box"
+                                            onChange={(e) => handleInputSecChange(e, course.id)}/>
                                     </label>
                                 </div>
                                 </div>
@@ -141,7 +192,7 @@ const SingleCourse: React.FC<Props> = ({
                             <label className='credit_label'>
                                 Credits:
                                 <select className='select_box'
-                                        onChange={(e) => handleSelectChange(e, course.id)}>
+                                        onChange={(e) => handleSelectCreditChange(e, course.id)}>
                                     <option value="0">0</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -150,10 +201,9 @@ const SingleCourse: React.FC<Props> = ({
                                     <option value="5">5</option>
                                     <option value="6">6</option>
                                 </select>
-                            {/* </label>
-                            <label className='term_label'> */}
                                 Term:
-                                <select className='select_box'>
+                                <select className='select_box'
+                                        onChange={(e) => handleSelectTermChange(e, course.id)}>
                                     <option value="none" selected disabled hidden></option>
                                     <option value="fall">Fall</option>
                                     <option value="spring">Spring</option>

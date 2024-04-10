@@ -1,29 +1,61 @@
 import React from 'react';
 import './styles.css';
 import { CSVLink } from "react-csv";
+import { Professor, Course } from '../model';
 
-const CSV: React.FC = () => {
+interface Props{
+    courses: Course[];
+    assignedProfessors: { [key: string]: Professor[] };
+    professors: Professor[];
+}
+
+const CSV: React.FC<Props> = ({courses, assignedProfessors, professors}) => {
 
     const headers = [
         {label: "SUB", key: 'course.sub'},
         {label: "NUM", key: 'course.num'},
         {label: "Sec", key: 'course.sec'},
         {label: "SECTION_TITLE", key: 'course.section_title'},
+        {label: "faculty load", key: 'course.credit'},
         {label: "Last", key: 'prof.last'},
         {label: "First", key: 'prof.first'},
         {label: "Term", key: 'course.term'}
     ]
 
-    const data = [
-        {course: { sub: "CHM", num: "100", sec: "1", section_title: "Chemistry Course", term: "Fall"}, prof: { last: "Everest", first: "Michael" }},
-        {course: { sub: "MA", num: "015", sec: "2", section_title: "Mathematics Course", term: "Spring"}, prof: { last: "Aboud", first: "Anna" }},
-        {course: { sub: "COM", num: "196", sec: "1", section_title: "Communication Studies Course", term: "Fall"}, prof: { last: "Dunn", first: "Deborah" }}
-    ]
+    const sortedProfessors: Professor[] = [...professors].sort((a, b) => a.last.localeCompare(b.last));
+
+    function getData(): any {
+        let data: any = []
+        for (let prof of sortedProfessors){
+            let byTerm: Course[] = []
+            for(let key in assignedProfessors){
+                let profList: Professor[] = assignedProfessors[key];
+                for (let prof2 of profList){
+                    let identifier = prof2.id
+                    if (identifier.startsWith(prof.id)){
+                        let courseId = Number(key.replace("SingleCourse", ''))
+                        for (let course of courses){
+                            if (course.id === courseId){
+                                byTerm.push(course)
+                            }
+                        }
+                    }
+                }
+            }
+            const sortedByTerm: Course[] = [...byTerm].sort((a, b) => a.term.localeCompare(b.term))
+            for (let course of sortedByTerm){
+                data.push({course: { sub: course.sub, num: course.num, sec: course.sec, section_title: course.course, term: course.term, credit: course.credit}, prof: {last: prof.last, first: prof.first}})
+            }
+            data.push({course: { sub: '', num: '', sec: '', section_title: '', term: '', credit: prof.credits}, prof: {last: '', first: ''}})
+            data.push({course: { sub: '', num: '', sec: '', section_title: '', term: '', credit: ''}, prof: {last: '', first: ''}})
+        }
+        return data
+    };
 
   return (
     <div>
         <CSVLink
-            data={data}
+            data={getData()}
             headers={headers}
             filename='file_name.csv'
             target='_blank'>

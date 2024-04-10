@@ -23,11 +23,12 @@ const App: React.FC = () => {
     const updatedAssignedCourse = {...assignedCourse}
 
     if(professor) {
-      setProfessors([...professors, {id: Date.now().toString(), professor:professor, isDone: false, course: false}])
+      const [first, last] = professor.split(' ')
+      setProfessors([...professors, {id: Date.now().toString(), professor:professor, isDone: false, course: false, credits: '0', first: first, last: last}])
       setProfessor("");
     }
     if(course) {
-      setCourses([...courses, {id: Date.now(), course:course, isDone: false, credit: '0'}])
+      setCourses([...courses, {id: Date.now(), course:course, isDone: false, credit: '0', term: '', sub: '', num: '', sec: ''}])
       updatedAssignedCourse["SingleCourse"+Date.now.toString()] = []
       setCourse("");
       setAssignedCourse(updatedAssignedCourse)
@@ -47,15 +48,28 @@ const App: React.FC = () => {
     if (destination.droppableId===source.droppableId && destination.index===source.index) return;
     if (source.droppableId==='CoursesList') return;
 
-    let add, 
+    let add: Professor, 
       active = professors,
-      assigned = assignedCourse;
+      assigned = assignedCourse,
+      courseList: Course[] = courses;
 
     if(source.droppableId === 'ProfessorsList' && destination.droppableId.startsWith("SingleCourse")) {
       add = active[source.index];
-      assigned[destination.droppableId] = [{id: add.id + Date.now().toString(), professor:add?.professor, isDone: false, course: true}]
+      assigned[destination.droppableId] = [{id: add.id + Date.now().toString(), professor:add?.professor, isDone: false, course: true, credits: '', first: add.first, last: add.last}]
       setAssignedCourse(assigned);
       setProfessors(active);
+
+      // let courseId = Number(destination.droppableId.replace("SingleCourse", ''))
+      // let totalCred: number = Number(add.credits)
+      // for (let cour of courseList){
+      //   if (cour.id === courseId){
+      //     totalCred += Number(cour.credit)
+      //   }
+      // }
+      // setProfessors(
+      //   professors.map((professor) => (
+      //       professor.id === add.id ? {...professor, credits: String(totalCred)}: professor
+      //       )));
       return;
     }
 
@@ -80,7 +94,10 @@ const App: React.FC = () => {
       <div className='buttons'>
         <button className='clear_button' onClick={clearProgram}>Clear Program</button>
         <div>
-          <CSV/>
+          <CSV
+            courses={courses}
+            assignedProfessors={assignedCourse}
+            professors={professors}/>
         </div>
       </div>
       <div className="inputs">
