@@ -44,37 +44,66 @@ const CSV: React.FC<Props> = ({courses, assignedProfessors, professors, setProfe
                 }
             }
             const sortedByTerm: Course[] = [...byTerm].sort((a, b) => a.term.localeCompare(b.term))
-            for (let course of sortedByTerm){
-                data.push({course: { sub: course.sub, num: course.num, sec: course.sec, section_title: course.course, term: course.term, credit: course.credit}, prof: {last: prof.last, first: prof.first}})
+            if (sortedByTerm.length === 0){
+                data.push({course: { sub: '', num: '', sec: '', section_title: '', term: '', credit: prof.credits}, prof: {last: prof.last, first: prof.first}})
+            } else {
+                for (let course of sortedByTerm){
+                    data.push({course: { sub: course.sub, num: course.num, sec: course.sec, section_title: course.course, term: course.term, credit: course.credit}, prof: {last: prof.last, first: prof.first}})
+                }
+                data.push({course: { sub: '', num: '', sec: '', section_title: '', term: '', credit: prof.credits}, prof: {last: '', first: ''}})
             }
-            data.push({course: { sub: '', num: '', sec: '', section_title: '', term: '', credit: prof.credits}, prof: {last: '', first: ''}})
             data.push({course: { sub: '', num: '', sec: '', section_title: '', term: '', credit: ''}, prof: {last: '', first: ''}})
         }
         return data
     };
 
+    // const handleCSVExport = () => {
+    //     let totals: { [id: string]: number}
+    //     for (let profess of sortedProfessors){
+    //         let creditTotal = 0
+    //         for (let key in assignedProfessors) {
+    //             let profList: Professor[] = assignedProfessors[key];
+    //             for (let prof of profList) {
+    //                 let identifier = prof.id
+    //                 if (identifier.startsWith(profess.id)){
+    //                     let courseId = Number(key.replace("SingleCourse", ''))
+    //                     for (let course of courses){
+    //                         if (course.id === courseId){
+    //                             creditTotal= creditTotal+ Number(course.credit)
+    //                         }
+    //                     }
+    //                 }
+    //             }
+    //         }
+
+    //     }
+    // } 
+
     const handleCSVExport = () => {
-        for (let profess of professors){
-            let creditTotal = 0
+        const updatedProfessors = sortedProfessors.map((profess) => {
+            let creditTotal = 0;
             for (let key in assignedProfessors) {
                 let profList: Professor[] = assignedProfessors[key];
                 for (let prof of profList) {
-                    let identifier = prof.id
-                    if (identifier.startsWith(profess.id)){
-                        let courseId = Number(key.replace("SingleCourse", ''))
-                        for (let course of courses){
-                            if (course.id === courseId){
-                                creditTotal= creditTotal+ Number(course.credit)
+                    let identifier = prof.id;
+                    if (identifier.startsWith(profess.id)) {
+                        let courseId = Number(key.replace("SingleCourse", ''));
+                        for (let course of courses) {
+                            if (course.id === courseId) {
+                                creditTotal += Number(course.credit);
                             }
                         }
                     }
                 }
             }
-            setProfessors(
-                professors.map((professor) => (
-                    professor.id === profess.id ? {...professor, credits:String(creditTotal)}: professor
-                    )));
-        }
+            return {...profess, credits: String(creditTotal)};
+        });
+        setProfessors(updatedProfessors);
+    }
+
+    function getCSVTitle(): string {
+        let date = Date.now().toString()
+        return "Professor-Course Load Report "+ date + '.csv'
     }
 
   return (
@@ -82,7 +111,7 @@ const CSV: React.FC<Props> = ({courses, assignedProfessors, professors, setProfe
         <CSVLink
             data={getData()}
             headers={headers}
-            filename='file_name.csv'
+            filename={getCSVTitle()}
             target='_blank'>
         <button className='csv_button'
             onClick={handleCSVExport}>

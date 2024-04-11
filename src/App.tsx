@@ -23,9 +23,15 @@ const App: React.FC = () => {
     const updatedAssignedCourse = {...assignedCourse}
 
     if(professor) {
-      const [first, last] = professor.split(' ')
-      setProfessors([...professors, {id: Date.now().toString(), professor:professor, isDone: false, course: false, credits: '0', first: first, last: last}])
-      setProfessor("");
+      if(professor.includes(' ')){
+        const [first, last] = professor.split(' ')
+        setProfessors([...professors, {id: Date.now().toString(), professor:professor, isDone: false, course: false, credits: '0', first: first, last: last}])
+        setProfessor("");
+      }
+      if(!professor.includes(' ')){
+        setProfessors([...professors, {id: Date.now().toString(), professor:professor, isDone: false, course: false, credits: '0', first: '', last: professor}])
+        setProfessor("");
+      }
     }
     if(course) {
       setCourses([...courses, {id: Date.now(), course:course, isDone: false, credit: '0', term: '', sub: '', num: '', sec: ''}])
@@ -50,8 +56,7 @@ const App: React.FC = () => {
 
     let add: Professor, 
       active = professors,
-      assigned = assignedCourse,
-      courseList: Course[] = courses;
+      assigned = assignedCourse;
 
     if(source.droppableId === 'ProfessorsList' && destination.droppableId.startsWith("SingleCourse")) {
       add = active[source.index];
