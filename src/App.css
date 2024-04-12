@@ -50,12 +50,55 @@ body {
   }
 }
 
-.inputs, .lists{
+.inputs {
   display: flex; 
   flex-direction:row;
   width: 95%;
   justify-content: space-between;
   position: relative;
+}
+
+.lists{
+  display: flex; 
+  flex-direction:row;
+  width: 95%;
+  justify-content: space-between;
+  position: relative;
+}
+
+.prof_input{
+  display: flex; 
+  flex-direction:row;
+  width: 95%;
+  justify-content: space-between;
+  position: relative;
+}
+
+.course_input{
+  display: flex; 
+  flex-direction:row;
+  width: 95%;
+  justify-content: space-between;
+  position: relative;
+}
+
+.course_list{
+  display: flex; 
+  flex-direction:row;
+  width: 95%;
+  justify-content: space-between;
+  position: relative;
+}
+
+.prof_list{
+  display: flex; 
+  flex-direction:row;
+  width: 95%;
+  height: 200px;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .buttons {

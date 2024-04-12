@@ -95,23 +95,31 @@ const App: React.FC = () => {
         </div>
       </div>
       <div className="inputs">
+        <div className='prof_input'>
         <ProfessorInputField professor={professor} setProfessor={setProfessor} handleAdd={handleAdd} />
+        </div>
+        <div className='course_input'>
         <CourseInputField course={course} setCourse={setCourse} handleAdd={handleAdd}/>
+        </div>
       </div>
       <div className="lists">
-        <ProfessorList 
-          professors={professors} 
-          setProfessors={setProfessors}
-          assignedProfessors={assignedCourse}
-          setAssignedProfessors={setAssignedCourse}
-          courses={courses}/>
-        <CourseList 
-          courses={courses} 
-          setCourses={setCourses}
-          assignedProfessors={assignedCourse}
-          setAssignedProfessors={setAssignedCourse}
-          professors={professors}
-          setProfessors={setProfessors}/> 
+        <div className='prof_list'>
+          <ProfessorList 
+            professors={professors} 
+            setProfessors={setProfessors}
+            assignedProfessors={assignedCourse}
+            setAssignedProfessors={setAssignedCourse}
+            courses={courses}/>
+          </div>
+        <div className='course_list'>
+          <CourseList 
+            courses={courses} 
+            setCourses={setCourses}
+            assignedProfessors={assignedCourse}
+            setAssignedProfessors={setAssignedCourse}
+            professors={professors}
+            setProfessors={setProfessors}/> 
+          </div>
       </div>
     </div>
     </DragDropContext>
