@@ -42,10 +42,14 @@ const App: React.FC = () => {
   };
 
   const clearProgram = () => {
-    setCourses([])
-    setProfessors([])
-    setAssignedCourse({})
-  }
+    const isConfirmed = window.confirm('Are you sure you want to clear the program?');
+
+    if (isConfirmed) {
+      setCourses([]);
+      setProfessors([]);
+      setAssignedCourse({});
+    }
+  };
 
   const onDragEnd = (result:DropResult) => {
     const { source, destination } = result;
