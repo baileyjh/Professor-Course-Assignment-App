@@ -26,8 +26,7 @@ const SingleProfessor = ({index, professor, professors, setProfessors, assignedP
     };
 
     const handleDelete = (id: string) => {
-        let newAssignedProfessors
-        newAssignedProfessors = assignedProfessors
+        let newAssignedProfessors = {...assignedProfessors}
 
         for (let key in newAssignedProfessors) {
             let newValue, array
@@ -41,6 +40,21 @@ const SingleProfessor = ({index, professor, professors, setProfessors, assignedP
 
     const handleEdit = (e: React.FormEvent, id: string) => {
         e.preventDefault();
+
+        let newAssignedProfessors = {...assignedProfessors}
+
+        for (let key in newAssignedProfessors) {
+            let newValue: Professor[], array: Professor[]
+            array = newAssignedProfessors[key]
+            for (let prof of array){
+                if (prof.id.toString().startsWith(id.toString())){
+                    newValue = array.map((profess) =>({...profess, professor:editProfessor}));
+                    newAssignedProfessors[key] = newValue
+                }
+            }
+        }
+
+        setAssignedProfessors(newAssignedProfessors)
 
         setProfessors(
             professors.map((professor) => (

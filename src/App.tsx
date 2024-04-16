@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import ProfessorInputField from './components/ProfessorInputField';
 import CourseInputField from './components/CourseInputField';
@@ -17,6 +17,35 @@ const App: React.FC = () => {
   const [course, setCourse] = useState<string>("");
   const [courses, setCourses]= useState<Course[]>([]);
 
+  useEffect(() => {
+    const storedProfessors = localStorage.getItem('professors');
+    if (storedProfessors) {
+      setProfessors(JSON.parse(storedProfessors));
+    }
+
+    const storedCourses = localStorage.getItem('courses');
+    if (storedCourses) {
+      setCourses(JSON.parse(storedCourses));
+    }
+
+    const storedAssignedCourse = localStorage.getItem('assignedCourse');
+    if (storedAssignedCourse) {
+      setAssignedCourse(JSON.parse(storedAssignedCourse));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('professors', JSON.stringify(professors));
+  }, [professors]);
+
+  useEffect(() => {
+    localStorage.setItem('courses', JSON.stringify(courses));
+  }, [courses]);
+
+  useEffect(() => {
+    localStorage.setItem('assignedCourse', JSON.stringify(assignedCourse));
+  }, [assignedCourse]);
+  
   const handleAdd = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -60,7 +89,7 @@ const App: React.FC = () => {
 
     let add: Professor, 
       active = professors,
-      assigned = assignedCourse;
+      assigned = { ...assignedCourse };
 
     if(source.droppableId === 'ProfessorsList' && destination.droppableId.startsWith("SingleCourse")) {
       add = active[source.index];
@@ -83,6 +112,8 @@ const App: React.FC = () => {
       return;
     }
 };
+
+  console.log(localStorage)
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>

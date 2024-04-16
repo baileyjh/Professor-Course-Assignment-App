@@ -122,6 +122,7 @@ const SingleCourse: React.FC<Props> = ({
                                 <div className='course_key'>
                                     <label className='sub_label'>
                                         <select className='select_box'
+                                                value={course.sub}
                                                 onChange={(e) => handleSelectSubChange(e, course.id)}>
                                             <option value="none" selected disabled hidden></option>
                                             <option value="AN">AN</option>
@@ -166,10 +167,12 @@ const SingleCourse: React.FC<Props> = ({
                                         —
                                         <input 
                                             className="number_input_box"
+                                            value={course.num}
                                             onChange={(e) => handleInputNumChange(e, course.id)}/>
                                         —
                                         <input 
                                             className="section_input_box"
+                                            value={course.sec}
                                             onChange={(e) => handleInputSecChange(e, course.id)}/>
                                     </label>
                                 </div>
@@ -178,6 +181,7 @@ const SingleCourse: React.FC<Props> = ({
                             <label className='credit_label'>
                                 Credits:
                                 <select className='select_box'
+                                        value={course.credit}
                                         onChange={(e) => handleSelectCreditChange(e, course.id)}>
                                     <option value="0">0</option>
                                     <option value="1">1</option>
@@ -189,6 +193,7 @@ const SingleCourse: React.FC<Props> = ({
                                 </select>
                                 Term:
                                 <select className='select_box'
+                                        value={course.term}
                                         onChange={(e) => handleSelectTermChange(e, course.id)}>
                                     <option value="none" selected disabled hidden></option>
                                     <option value="fall">Fall</option>
