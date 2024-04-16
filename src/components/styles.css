@@ -339,3 +339,25 @@
   .csv_button:hover {
     background-color: #157da9;
   }
+
+  .import_button {
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 0px;
+    margin-bottom: 40px;
+    color: white;
+    text-align: center;
+    background-color: #b79d56;
+    border: none;
+    padding: 10px 23px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 5px;
+    transition: 0.2s all;
+    box-shadow: 0 0 10px black;
+  }
+
+  .import_button:hover {
+    background-color: #cfb66f;
+  }

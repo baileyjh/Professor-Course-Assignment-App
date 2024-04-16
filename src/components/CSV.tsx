@@ -57,28 +57,6 @@ const CSV: React.FC<Props> = ({courses, assignedProfessors, professors, setProfe
         return data
     };
 
-    // const handleCSVExport = () => {
-    //     let totals: { [id: string]: number}
-    //     for (let profess of sortedProfessors){
-    //         let creditTotal = 0
-    //         for (let key in assignedProfessors) {
-    //             let profList: Professor[] = assignedProfessors[key];
-    //             for (let prof of profList) {
-    //                 let identifier = prof.id
-    //                 if (identifier.startsWith(profess.id)){
-    //                     let courseId = Number(key.replace("SingleCourse", ''))
-    //                     for (let course of courses){
-    //                         if (course.id === courseId){
-    //                             creditTotal= creditTotal+ Number(course.credit)
-    //                         }
-    //                     }
-    //                 }
-    //             }
-    //         }
-
-    //     }
-    // } 
-
     const handleCSVExport = () => {
         const updatedProfessors = sortedProfessors.map((profess) => {
             let creditTotal = 0;
