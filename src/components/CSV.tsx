@@ -32,8 +32,7 @@ const CSV: React.FC<Props> = ({courses, assignedProfessors, professors, setProfe
             for(let key in assignedProfessors){
                 let profList: Professor[] = assignedProfessors[key];
                 for (let prof2 of profList){
-                    let identifier = prof2.id
-                    if (identifier.startsWith(prof.id)){
+                    if (prof.last === prof2.last && prof.first === prof2.first){
                         let courseId = Number(key.replace("SingleCourse", ''))
                         for (let course of courses){
                             if (course.id === courseId){
@@ -63,8 +62,7 @@ const CSV: React.FC<Props> = ({courses, assignedProfessors, professors, setProfe
             for (let key in assignedProfessors) {
                 let profList: Professor[] = assignedProfessors[key];
                 for (let prof of profList) {
-                    let identifier = prof.id;
-                    if (identifier.startsWith(profess.id)) {
+                    if (prof.last === profess.last && prof.first === profess.first) {
                         let courseId = Number(key.replace("SingleCourse", ''));
                         for (let course of courses) {
                             if (course.id === courseId) {

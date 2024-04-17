@@ -25,30 +25,39 @@ const SingleProfessor = ({index, professor, professors, setProfessors, assignedP
         professor.id===id?{...professor, isDone:!professor.isDone}: professor))
     };
 
-    const handleDelete = (id: string) => {
+    const handleDelete = (id: string, last: string, first: string) => {
         let newAssignedProfessors = {...assignedProfessors}
 
         for (let key in newAssignedProfessors) {
             let newValue, array
             array = newAssignedProfessors[key]
-            newValue = array.filter((professor) => !professor.id.toString().startsWith(id.toString()))
+            newValue = array.filter((professor) => !(professor.last === last && professor.first === first))
             newAssignedProfessors[key] = newValue
         }
         setAssignedProfessors(newAssignedProfessors)
         setProfessors(professors.filter((professor) => professor.id !== id));
     };
 
-    const handleEdit = (e: React.FormEvent, id: string) => {
+    const handleEdit = (e: React.FormEvent, id: string, last: string, first: string) => {
         e.preventDefault();
 
         let newAssignedProfessors = {...assignedProfessors}
+
+        let newFirst: string, newLast: string
+
+        if(editProfessor.includes(' ')){
+            [newFirst, newLast] = editProfessor.split(' ')
+        } else{
+            newFirst = ''
+            newLast = editProfessor
+        }
 
         for (let key in newAssignedProfessors) {
             let newValue: Professor[], array: Professor[]
             array = newAssignedProfessors[key]
             for (let prof of array){
-                if (prof.id.toString().startsWith(id.toString())){
-                    newValue = array.map((profess) =>({...profess, professor:editProfessor}));
+                if (prof.last === last && prof.first === first){
+                    newValue = array.map((profess) =>({...profess, professor:editProfessor, last: newLast, first: newFirst}));
                     newAssignedProfessors[key] = newValue
                 }
             }
@@ -58,7 +67,7 @@ const SingleProfessor = ({index, professor, professors, setProfessors, assignedP
 
         setProfessors(
             professors.map((professor) => (
-                professor.id === id ? {...professor, professor:editProfessor}: professor
+                professor.id === id ? {...professor, professor:editProfessor, last: newLast, first: newFirst}: professor
                 )));
         
                 setEdit(false);
@@ -74,8 +83,7 @@ const SingleProfessor = ({index, professor, professors, setProfessors, assignedP
         for (let key in newAssignedProfessors) {
             let profList: Professor[] = newAssignedProfessors[key];
             for (let prof of profList) {
-                let identifier = prof.id
-                if (identifier.startsWith(professor.id)){
+                if (prof.last === professor.last && prof.first === professor.first){
                     let courseId
                     courseId = Number(key.replace("SingleCourse", ''))
                     for (let course of courses){
@@ -100,7 +108,7 @@ const SingleProfessor = ({index, professor, professors, setProfessors, assignedP
             {(provided, snapshot) => (
             <form 
                 className={`professors_single ${snapshot.isDragging? 'drag': ''}`}
-                onSubmit={(e) => handleEdit(e, professor.id)}
+                onSubmit={(e) => handleEdit(e, professor.id, professor.last, professor.first)}
                 {...provided.draggableProps}
                 {...provided.dragHandleProps}
                 ref={provided.innerRef}>
@@ -125,7 +133,7 @@ const SingleProfessor = ({index, professor, professors, setProfessors, assignedP
                     }}}>
                     <AiFillEdit />
                 </span>
-                <span className='icon'  onClick={() => handleDelete(professor.id)}>
+                <span className='icon'  onClick={() => handleDelete(professor.id, professor.last, professor.first)}>
                     <AiFillDelete />
                 </span>
                 <span className='icon' onClick={() => handleDone(professor.id)}>

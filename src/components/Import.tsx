@@ -23,7 +23,32 @@ const Import: React.FC<Props> = ({courses, setCourses, assignedProfessors, setAs
           }
       };
 
-    const handleOnSubmit = () => {
+      const parseCSV = (string: string) => {
+        const csvHeader = string.slice(0, string.indexOf("\n")).split(",");
+        const csvRows = string.slice(string.indexOf("\n") + 1).split("\n");
+    
+        let newCourses: Course[], newProfessors: Professor[], newAssignedProfessors: { [key: string]: Professor[] }
+
+        for (let row of csvRows){
+          let values = row.split(",");
+          if (values[0] === ''){
+            continue
+          } else{
+            let sub = values[0]
+            let num = values[1]
+            let sec = values[2]
+            let course = values[3]
+            let credits = values[4]
+            let lastName = values[5]
+            let firstName = values[6]
+            let term = values[7]
+
+            
+          }
+        }
+      };
+    
+      const handleOnSubmit = () => {
     
         if (file) {
           fileReader.onload = function (event) {
@@ -43,20 +68,6 @@ const Import: React.FC<Props> = ({courses, setCourses, assignedProfessors, setAs
       };
 
   return (
-    // <div>
-    //     <form>
-    //         <input
-    //             type={"file"}
-    //             id={"csvFileInput"}
-    //             accept={".csv"}
-    //             onChange={handleOnChange}/>
-    //         <button className='import_button'
-    //             onClick={(e) => {
-    //             handleOnSubmit(e);}}>
-    //             Import CSV
-    //         </button>
-    //     </form>
-    // </div>
     <div>
       <input
         type={"file"}
