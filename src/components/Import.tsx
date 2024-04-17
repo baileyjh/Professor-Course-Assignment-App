@@ -23,36 +23,62 @@ const Import: React.FC<Props> = ({courses, setCourses, assignedProfessors, setAs
           }
       };
 
-      const parseCSV = (string: string) => {
-        const csvHeader = string.slice(0, string.indexOf("\n")).split(",");
-        const csvRows = string.slice(string.indexOf("\n") + 1).split("\n");
+    const parseCSV = (string: string) => {
+      const csvRows = string.slice(string.indexOf("\n") + 1).split("\n");
     
-        let newCourses: Course[], newProfessors: Professor[], newAssignedProfessors: { [key: string]: Professor[] }
+      let newCourses: Course[] = [], newProfessors: Professor[] = [], newAssignedProfessors: { [key: string]: Professor[] } = {}
+      let professorIdCounter = 1;
 
-        for (let row of csvRows){
-          let values = row.split(",");
-          if (values[0] === ''){
-            continue
-          } else{
-            let sub = values[0]
-            let num = values[1]
-            let sec = values[2]
-            let course = values[3]
-            let credits = values[4]
-            let lastName = values[5]
-            let firstName = values[6]
-            let term = values[7]
+      for (let row of csvRows){
+        let values = row.split(",");
+        if (values[0].split('"').join('') === ''){
+          continue
+        } else{
+          let sub = values[0].split('"').join('')
+          let num = values[1].split('"').join('')
+          let sec = values[2].split('"').join('')
+          let course = values[3].split('"').join('')
+          let credits = values[4].split('"').join('')
+          let lastName = values[5].split('"').join('')
+          let firstName = values[6].split('"').join('')
+          let term = values[7].split('"').join('')
 
-            
+          let fullName = firstName + " "+ lastName
+
+          let newCourse: Course = {id: Date.now() + professorIdCounter++, course:course, isDone: false, credit: credits, term: term, sub: sub, num: num, sec: sec}
+          let newProfessor: Professor = {id: Date.now().toString() + professorIdCounter++, professor:fullName, isDone: false, course: false, credits: '0', first: firstName, last: lastName}
+
+          let alreadyProfessor = false
+          for (let prof of newProfessors){
+            if (prof.last === newProfessor.last && prof.first === newProfessor.first){
+              alreadyProfessor = true
+            }
           }
+
+          if (!alreadyProfessor){
+            newProfessors = [...newProfessors, newProfessor]
+          }
+
+          newCourses = [...newCourses, newCourse]
+          newAssignedProfessors["SingleCourse"+newCourse.id] = [{id: newProfessor.id, professor: newProfessor.professor, isDone: false, course: true, credits: '0', first: newProfessor.first, last: newProfessor.last}]
         }
-      };
+      }
+      setCourses(newCourses)
+      setProfessors(newProfessors)
+      setAssignedProfessors(newAssignedProfessors)
+    };
     
       const handleOnSubmit = () => {
     
         if (file) {
           fileReader.onload = function (event) {
             const csvOutput = event.target?.result
+            if (typeof csvOutput === "string"){
+              setCourses([]);
+              setProfessors([]);
+              setAssignedProfessors({});
+              parseCSV(csvOutput)
+            }
           };
     
           fileReader.readAsText(file);
