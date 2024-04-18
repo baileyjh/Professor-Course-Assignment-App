@@ -59,7 +59,7 @@ const Import: React.FC<Props> = ({courses, setCourses, assignedProfessors, setAs
           }
 
           newCourses = [...newCourses, newCourse]
-          newAssignedProfessors["SingleCourse"+newCourse.id] = [{id: newProfessor.id, professor: newProfessor.professor, isDone: false, course: true, credits: '0', first: newProfessor.first, last: newProfessor.last}]
+          newAssignedProfessors["SingleCourse"+newCourse.id] = [{id: newProfessor.id + 1, professor: newProfessor.professor, isDone: false, course: true, credits: '0', first: newProfessor.first, last: newProfessor.last}]
         }
       }
       setCourses(newCourses)
