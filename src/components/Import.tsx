@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './styles.css';
 import { Professor, Course } from '../model';
 
@@ -15,15 +15,14 @@ const Import: React.FC<Props> = ({courses, setCourses, assignedProfessors, setAs
 
     const [file, setFile] = useState<File | undefined>();
 
-    const fileReader = new FileReader()
-
     const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files?.length) {
-            setFile(e.target.files[0]);
+            setFile(e.target.files[0])
+            e.target.value = '';;
           }
       };
 
-    const parseCSV = (string: string) => {
+    const parseCSV = useCallback((string: string) => {
       const csvRows = string.slice(string.indexOf("\n") + 1).split("\n");
     
       let newCourses: Course[] = [], newProfessors: Professor[] = [], newAssignedProfessors: { [key: string]: Professor[] } = {}
@@ -38,7 +37,7 @@ const Import: React.FC<Props> = ({courses, setCourses, assignedProfessors, setAs
           let num = values[1].split('"').join('')
           let sec = values[2].split('"').join('')
           let course = values[3].split('"').join('')
-          let credits = values[4].split('"').join('')
+          let credits = values[4].split('"').join('') 
           let lastName = values[5].split('"').join('')
           let firstName = values[6].split('"').join('')
           let term = values[7].split('"').join('')
@@ -66,32 +65,40 @@ const Import: React.FC<Props> = ({courses, setCourses, assignedProfessors, setAs
       setCourses(newCourses)
       setProfessors(newProfessors)
       setAssignedProfessors(newAssignedProfessors)
-    };
+    }, [setCourses, setProfessors, setAssignedProfessors]);
     
-      const handleOnSubmit = () => {
-    
-        if (file) {
-          fileReader.onload = function (event) {
-            const csvOutput = event.target?.result
-            if (typeof csvOutput === "string"){
-              setCourses([]);
-              setProfessors([]);
-              setAssignedProfessors({});
-              parseCSV(csvOutput)
-            }
-          };
-    
-          fileReader.readAsText(file);
-        }
-      };
 
       const handleButtonClick = () => {
         const fileInput = document.getElementById('csvFileInput');
         if (fileInput) {
           fileInput.click(); // Trigger file input click
         }
-        handleOnSubmit();
       };
+
+      useEffect(() => {
+        const fileReader = new FileReader();
+    
+        const handleFileLoad = (event: ProgressEvent<FileReader>) => {
+            const csvOutput = event.target?.result;
+            if (typeof csvOutput === "string") {
+                setCourses([]);
+                setProfessors([]);
+                setAssignedProfessors({});
+                parseCSV(csvOutput);
+            }
+        };
+    
+        if (file) {
+            fileReader.onload = handleFileLoad;
+            fileReader.readAsText(file);
+        }
+    
+        // Cleanup function
+        return () => {
+            fileReader.onload = null; // Remove event listener
+        };
+    }, [file, parseCSV, setCourses, setProfessors, setAssignedProfessors]);
+    
 
   return (
     <div>
