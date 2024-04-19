@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import './styles.css';
 import { Professor, Course } from '../model';
+import Papa from 'papaparse';
 
 interface Props{
     courses: Course[];
@@ -22,50 +23,54 @@ const Import: React.FC<Props> = ({courses, setCourses, assignedProfessors, setAs
           }
       };
 
-    const parseCSV = useCallback((string: string) => {
-      const csvRows = string.slice(string.indexOf("\n") + 1).split("\n");
-    
-      let newCourses: Course[] = [], newProfessors: Professor[] = [], newAssignedProfessors: { [key: string]: Professor[] } = {}
-      let professorIdCounter = 1;
+const parseCSV = useCallback((csvString: string) => {
+    Papa.parse(csvString, {
+        complete: function(results) {
+            const csvRows = results.data;
+            let newCourses: Course[] = [], newProfessors: Professor[] = [], newAssignedProfessors: { [key: string]: Professor[] } = {}
+            let professorIdCounter = 1;
 
-      for (let row of csvRows){
-        let values = row.split(",");
-        if (values[0].split('"').join('') === ''){
-          continue
-        } else{
-          let sub = values[0].split('"').join('')
-          let num = values[1].split('"').join('')
-          let sec = values[2].split('"').join('')
-          let course = values[3].split('"').join('')
-          let credits = values[4].split('"').join('') 
-          let lastName = values[5].split('"').join('')
-          let firstName = values[6].split('"').join('')
-          let term = values[7].split('"').join('')
+            for (let i = 1; i < csvRows.length; i++) { // Start from index 1 to skip header row
+                const row: string = csvRows[i] as string;
+                if (row[0] === ''){
+                  continue
+                } else {
+                  const sub = row[0];
+                  const num = row[1];
+                  const sec = row[2];
+                  const course = row[3];
+                  const credits = row[4];
+                  const lastName = row[5];
+                  const firstName = row[6];
+                  const term = row[7];
 
-          let fullName = firstName + " "+ lastName
+                  const fullName = firstName + " " + lastName;
 
-          let newCourse: Course = {id: Date.now() + professorIdCounter++, course:course, isDone: false, credit: credits, term: term, sub: sub, num: num, sec: sec}
-          let newProfessor: Professor = {id: Date.now().toString() + professorIdCounter++, professor:fullName, isDone: false, course: false, credits: '0', first: firstName, last: lastName}
+                  const newCourse: Course = { id: Date.now() + professorIdCounter++, course: course, isDone: false, credit: credits, term: term, sub: sub, num: num, sec: sec };
+                  const newProfessor: Professor = { id: Date.now().toString() + professorIdCounter++, professor: fullName, isDone: false, course: false, credits: '0', first: firstName, last: lastName };
 
-          let alreadyProfessor = false
-          for (let prof of newProfessors){
-            if (prof.last === newProfessor.last && prof.first === newProfessor.first){
-              alreadyProfessor = true
-            }
-          }
+                  let alreadyProfessor = false
+                  for (let prof of newProfessors) {
+                    if (prof.last === newProfessor.last && prof.first === newProfessor.first) {
+                        alreadyProfessor = true
+                    }
+                  }
 
-          if (!alreadyProfessor){
-            newProfessors = [...newProfessors, newProfessor]
-          }
+                  if (!alreadyProfessor) {
+                    newProfessors = [...newProfessors, newProfessor]
+                  }
 
-          newCourses = [...newCourses, newCourse]
-          newAssignedProfessors["SingleCourse"+newCourse.id] = [{id: newProfessor.id + 1, professor: newProfessor.professor, isDone: false, course: true, credits: '0', first: newProfessor.first, last: newProfessor.last}]
-        }
-      }
-      setCourses(newCourses)
-      setProfessors(newProfessors)
-      setAssignedProfessors(newAssignedProfessors)
-    }, [setCourses, setProfessors, setAssignedProfessors]);
+                  newCourses = [...newCourses, newCourse]
+                  newAssignedProfessors["SingleCourse" + newCourse.id] = [{ id: newProfessor.id + 1, professor: newProfessor.professor, isDone: false, course: true, credits: '0', first: newProfessor.first, last: newProfessor.last }]
+                }
+              }
+              setCourses(newCourses)
+              setProfessors(newProfessors)
+              setAssignedProfessors(newAssignedProfessors)
+          },
+         });
+  }, [setCourses, setProfessors, setAssignedProfessors]);
+
     
 
       const handleButtonClick = () => {
