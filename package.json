@@ -1,7 +1,8 @@
 {
-  "name": "professor-course-app",
-  "version": "0.1.0",
+  "name": "professor-course-assignment-tool",
+  "version": "1.0.0",
   "private": true,
+  "main": "main.js",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -22,10 +23,10 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "electron .",
     "electron-start": "electron .",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "echo \"Error: no test specified\" && exit 1",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -54,11 +55,6 @@
     "electron-builder": "^24.13.3",
     "electron-is-dev": "^3.0.1"
   },
-
-  "electron": "electron .",
-  "dist": "electron-builder",
-  "main": "electron.js",
-
   "build": {
     "appId": "com.example.myapp",
     "productName": "My Electron App",
